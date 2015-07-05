@@ -4,7 +4,10 @@
 		<title><%= title %></title>
 	</head>
 	<body>
-		<img src="img/canvas.png" alt="Logo" />
-		<h1><%= title %></h1>
+		<% if ( userFullName ) { %>
+		 <h2>Hello <%=userFullName%> </h2> 
+		 <a href="/signout">Sign out</a>
+		 <% } %>
+		 <a href="/oauth/google">Sign in with Google</a>
 	</body>
 </html>
