@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
 		<title><%= title %></title>
 	</head>
-	<body>
+	<body ng-app>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="/">
+		        Chat MEAN
+		      </a>
+		    </div>
+		    <% if ( userFullName ) { %>
+			<ul class="nav navbar-nav navbar-right">
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= userFullName %> <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		          	<li><a href="/users/<%= userId %>">Profile</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="/signout">Logout</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      <% } %>
+		  </div>
+		</nav>
 		<% if ( userFullName ) { %>
 		 <h2>Hello <%=userFullName%> </h2> 
 		 <a href="/signout">Sign out</a>
 		 <% } %>
 		 <a href="/oauth/google">Sign in with Google</a>
+
+		 <section>
+			<input type="text" id="text1" ng-model="name">
+			<input type="text" id="text2" ng-model="name">
+		</section>
+
+		 <script type="text/javascript" src="/lib/angular/angular.js"></script>
+		 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+		 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+		 <script type="text/javascript" src="/application.js"></script>
 	</body>
 </html>
