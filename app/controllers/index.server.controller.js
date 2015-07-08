@@ -6,11 +6,8 @@ exports.render = function(req, res) {
 	req.session.lastVisit = new Date();
 
 
-	console.log(req.user);
-	console.log("hello");
-	console.log(JSON.stringify(req.user));
 	res.render('index', {
-		title: 'Hello World',
+		title: 'MEAN chat',
 		user: req.user ? JSON.stringify(req.user) : '',
 		userFullName: req.user ? req.user.fullName : '',
 		userId: req.user ? req.user._id : ''

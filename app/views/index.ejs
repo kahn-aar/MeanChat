@@ -26,9 +26,7 @@
 		      <% } %>
 		  </div>
 		</nav>
-		<% if ( user ) { %>
-		 <a href="/signout">Sign out</a>
-		 <% } else { %>
+		<% if ( !user ) { %>
 		 <a href="/oauth/google">Sign in with Google</a>
 		 <% } %>
 
@@ -42,6 +40,13 @@
 
 		 <script type="text/javascript" src="/lib/angular/angular.js"></script>
 		 <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+		 <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+
+		<script type="text/javascript" src="/articles/init.js"></script>
+		<script type="text/javascript" src="/articles/controllers/articlesController.js"></script>
+		<script type="text/javascript" src="/articles/services/articleFactory.js"></script>
+		<script type="text/javascript" src="/articles/routes/routes.js"></script>
+
 		 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
 		 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 		 <script type="text/javascript" src="/controllers/ProfileController.js"></script>
