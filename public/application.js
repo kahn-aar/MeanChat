@@ -1,6 +1,6 @@
 var mainApplicationModuleName = 'meanchat';
 var mainApplicationModule = angular.module(mainApplicationModuleName
-, ['ngResource', 'ngRoute', 'users', 'profile', 'articles']);
+, ['ngResource', 'ngRoute', 'users', 'profile', 'articles', 'chat']);
 angular.element(document).ready(function() {
 	angular.bootstrap(document, [mainApplicationModuleName]);
 });

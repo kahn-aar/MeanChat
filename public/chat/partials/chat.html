@@ -1,0 +1,59 @@
+<!-- <section data-ng-controller="ChatController">
+	<div data-ng-repeat="message in messages" data-ng-switch="message.type">
+		<strong data-ng-switch-when='status'>
+			<span data-ng-bind="message.created | date:'mediumTime'"></span>
+			<span data-ng-bind="message.username"></span>
+			<span>is</span>
+			<span data-ng-bind="message.text"></span>
+		</strong>
+		<span data-ng-switch-default>
+			<span data-ng-bind="message.created | date:'mediumTime'"></span>
+			<span data-ng-bind="message.username"></span>
+			<span>:</span>
+			<span data-ng-bind="message.text"></span>
+		</span>
+	</div>
+	<form ng-submit="sendMessage();">
+		<input type="text" data-ng-model="messageText">
+		<input type="submit">
+	</form>
+</section>
+ -->
+<div  data-ng-controller="ChatController" class="box box-danger direct-chat direct-chat-danger solid-box">
+  <div class="box-header with-border">
+    <h3 class="box-title">Chat room</h3>
+    <div class="box-tools pull-right">
+      <span data-toggle="tooltip" title="{{messages.length}} New Messages" class='badge bg-red'>{{messages.length}}</span>
+      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+      <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
+      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+    </div>
+  </div><!-- /.box-header -->
+  <div class="box-body">
+    <!-- Conversations are loaded here -->
+    <div class="direct-chat-messages">
+      <!-- Message. Default to the left -->
+      <div data-ng-repeat="message in messages" data-ng-switch="message.type" class="direct-chat-msg" ng-class="message.username === authentication.user.username ? 'right' : ''">
+        <div class='direct-chat-info clearfix'>
+          <span class='direct-chat-name' ng-class="message.username === authentication.user.username ? 'pull-right' : 'pull-left'">{{message.username}}</span>
+          <span class='direct-chat-timestamp' ng-class="message.username === authentication.user.username ? 'pull-left' : 'pull-right'">{{message.created | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div><!-- /.direct-chat-info -->
+        <img class="direct-chat-img" src="{{message.picture}}" alt="message user image" /><!-- /.direct-chat-img -->
+        <div class="direct-chat-text">
+          {{message.text}}
+        </div><!-- /.direct-chat-text -->
+      </div><!-- /.direct-chat-msg -->
+
+    </div><!-- /.direct-chat-pane -->
+  </div><!-- /.box-body -->
+  <div class="box-footer">
+    <div class="input-group" style="width:100%">
+    	<form ng-submit="sendMessage();">
+	      <input type="text" name="message" placeholder="Type Message ..." class="form-control" data-ng-model="messageText"/>
+	      <span class="input-group-btn">
+	        <input type="button" class="btn btn-danger btn-flat" type="submit" value="send"/>
+	      </span>
+	  </form>
+    </div>
+  </div><!-- /.box-footer-->
+</div>
