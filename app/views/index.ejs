@@ -10,7 +10,7 @@
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="/">
-		        Chat MEAN
+		        <%= title %>
 		      </a>
 		    </div>
 		    <% if ( user ) { %>
@@ -18,7 +18,7 @@
 		        <li class="dropdown">
 		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=userFullName%> <span class="caret"></span></a>
 		          <ul class="dropdown-menu">
-		          	<li><a href="/users/<%=userId%>">Profile</a></li>
+		          	<li><a href="/users">Profile</a></li>
 		            <li role="separator" class="divider"></li>
 		            <li><a href="/signout">Logout</a></li>
 		          </ul>
@@ -40,27 +40,32 @@
 		</script>
 
 		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-		 <script type="text/javascript" src="/lib/angular/angular.js"></script>
-		 <script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
-		 <script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+		<script type="text/javascript" src="/lib/angular/angular.js"></script>
+		<script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+		<script type="text/javascript" src="/lib/angular-resource/angular-resource.js"></script>
+		<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+		<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
 		<script type="text/javascript" src="/articles/init.js"></script>
 		<script type="text/javascript" src="/articles/controllers/articlesController.js"></script>
 		<script type="text/javascript" src="/articles/services/articleFactory.js"></script>
 		<script type="text/javascript" src="/articles/routes/routes.js"></script>
+		 
+		<script type="text/javascript" src="/controllers/ProfileController.js"></script>
+		<script type="text/javascript" src="/controllers/HomeController.js"></script>
+		<script type="text/javascript" src="/config/routes.js"></script>
 
-		 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
-		 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-		 <script type="text/javascript" src="/controllers/ProfileController.js"></script>
-		 <script type="text/javascript" src="/controllers/HomeController.js"></script>
-		 <script type="text/javascript" src="/config/routes.js"></script>
-		 <script type="text/javascript" src="/users/services/init.js"></script>
-		 <script type="text/javascript" src="/users/services/authentication.js"></script>
+		<script type="text/javascript" src="/users/services/init.js"></script>
+		<script type="text/javascript" src="/users/services/authentication.js"></script>
+		<script type="text/javascript" src="/users/routes/route.js"></script>
+		<script type="text/javascript" src="/users/controllers/userController.js"></script>
 
-		 <script type="text/javascript" src="/chat/init.js"></script>
+		<script type="text/javascript" src="/chat/init.js"></script>
 		<script type="text/javascript" src="/chat/services/chatService.js"></script>
 		<script type="text/javascript" src="/chat/controllers/chatController.js"></script>
 		<script type="text/javascript" src="/chat/routes/route.js"></script>
-		 <script type="text/javascript" src="/application.js"></script>
+		<script type="text/javascript" src="/chat/filters/customFilters.js"></script>
+		
+		<script type="text/javascript" src="/application.js"></script>
 	</body>
 </html>

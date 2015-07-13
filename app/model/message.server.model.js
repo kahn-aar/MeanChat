@@ -20,7 +20,16 @@ var MessageSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User',
 		required: 'writer is required'
+	},
+	room: {
+		type: String,
+		default: "global"
 	}
 });
+
+MessageSchema.statics.findByRoom = function(roomName, callback) {
+	return this.find({ room: roomName }, callback);
+
+}
 
 mongoose.model('Message', MessageSchema);

@@ -19,21 +19,22 @@
 	</form>
 </section>
  -->
-<div  data-ng-controller="ChatController" class="box box-danger direct-chat direct-chat-danger solid-box">
+ <div data-ng-controller="ChatController" >
+<div class="box box-danger direct-chat direct-chat-danger solid-box" ng-repeat="roomName in roomNames">
   <div class="box-header with-border">
-    <h3 class="box-title">Chat room</h3>
+    <h3 class="box-title">{{roomName}} room</h3>
     <div class="box-tools pull-right">
       <span data-toggle="tooltip" title="{{messages.length}} New Messages" class='badge bg-red'>{{messages.length}}</span>
       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
       <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
-      <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      <button class="btn btn-box-tool" data-widget="remove" ng-click="leaveChat(roomName)"><i class="fa fa-times"></i></button>
     </div>
   </div><!-- /.box-header -->
   <div class="box-body">
     <!-- Conversations are loaded here -->
     <div class="direct-chat-messages">
       <!-- Message. Default to the left -->
-      <div data-ng-repeat="message in messages" data-ng-switch="message.type" class="direct-chat-msg" ng-class="message.username === authentication.user.username ? 'right' : ''">
+      <div data-ng-repeat="message in messages | isMessageRoom:roomName" data-ng-switch="message.type" class="direct-chat-msg" ng-class="message.username === authentication.user.username ? 'right' : ''">
         <div class='direct-chat-info clearfix'>
           <span class='direct-chat-name' ng-class="message.username === authentication.user.username ? 'pull-right' : 'pull-left'">{{message.username}}</span>
           <span class='direct-chat-timestamp' ng-class="message.username === authentication.user.username ? 'pull-left' : 'pull-right'">{{message.created | date:'dd/MM/yyyy HH:mm'}}</span>
@@ -48,12 +49,18 @@
   </div><!-- /.box-body -->
   <div class="box-footer">
     <div class="input-group" style="width:100%">
-    	<form ng-submit="sendMessage();">
+    	<form ng-submit="sendMessage(roomName);">
 	      <input type="text" name="message" placeholder="Type Message ..." class="form-control" data-ng-model="messageText"/>
+        <input type="hidden" name="room" class="form-control" data-ng-model="roomName"/>
 	      <span class="input-group-btn">
-	        <input type="button" class="btn btn-danger btn-flat" type="submit" value="send"/>
+	        <input class="btn btn-danger btn-flat" type="submit" value="send"/>
 	      </span>
 	  </form>
     </div>
   </div><!-- /.box-footer-->
+</div>
+
+<input type="text" name="roomName" placeholder="Room name " class="form-control" data-ng-model="newRoomName"/>
+<input type="button" class="btn btn-primary btn-flat" value="open new room" ng-click="openNewRoom()" />
+
 </div>
