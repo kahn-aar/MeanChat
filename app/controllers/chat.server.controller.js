@@ -1,6 +1,8 @@
 var mongoose = require('mongoose'),
 	Message = mongoose.model('Message');
 
+var connectedUsers = [];
+
 var getErrorMessage = function(err) {
 	if (err.errors) {
 		for (var errName in err.errors) {
@@ -13,7 +15,11 @@ var getErrorMessage = function(err) {
 	}
 };
 
-module.exports = function(io, socket) {
+exports.usersConnected = function(req, res, next) {
+	res.json(connectedUsers);
+}
+
+exports.connect = function(io, socket) {
 
 	io.emit('chatMessage', {
 		type: 'status',
@@ -21,6 +27,11 @@ module.exports = function(io, socket) {
 		created: Date.now(),
 		username: socket.request.user.username,
 		picture: socket.request.user.providerData.picture
+	});
+
+	connectedUsers.push({
+		userId: socket.request.user._id,
+		username: socket.request.user.username
 	});
 
 	messageBdd = createNewBddEntry({
@@ -46,7 +57,7 @@ module.exports = function(io, socket) {
 						message: getErrorMessage(err)
 					});
 				} else {
-					for (var i = 0; i < articles.length; i++) {
+					for (var i = articles.length - 1; i >= 0 ; i--) {
 						socket.emit('chatMessage', {
 							type: articles[i].type,
 							text: articles[i].text,
@@ -135,6 +146,14 @@ module.exports = function(io, socket) {
 			username: socket.request.user.username,
 			picture: socket.request.user.providerData.picture
 		});
+
+		var index = connectedUsers.indexOf({
+			userId: socket.request.user._id,
+			username: socket.request.user.username
+		});
+		if (index > -1) {
+		    connectedUsers.splice(index, 1);
+		}
 	});
 };
 

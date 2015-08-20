@@ -40,7 +40,8 @@ var UserSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	chatRooms: Array
 });
 
 UserSchema.virtual('fullName').get(function() {

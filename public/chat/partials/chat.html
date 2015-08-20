@@ -20,6 +20,13 @@
 </section>
  -->
  <div data-ng-controller="ChatController" >
+  <div class="">
+    <ul>
+      <li ng-repeat="user in usersConnected">
+        {{user.username}}
+      </li>
+    </ul>
+  </div>
 <div class="box box-danger direct-chat direct-chat-danger solid-box" ng-repeat="roomName in roomNames">
   <div class="box-header with-border">
     <h3 class="box-title">{{roomName}} room</h3>
@@ -32,7 +39,7 @@
   </div><!-- /.box-header -->
   <div class="box-body">
     <!-- Conversations are loaded here -->
-    <div class="direct-chat-messages">
+    <div id="{{roomName}}" class="direct-chat-messages">
       <!-- Message. Default to the left -->
       <div data-ng-repeat="message in messages | isMessageRoom:roomName" data-ng-switch="message.type" class="direct-chat-msg" ng-class="message.username === authentication.user.username ? 'right' : ''">
         <div class='direct-chat-info clearfix'>

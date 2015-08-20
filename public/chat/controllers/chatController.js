@@ -6,21 +6,28 @@ angular.module('chat').controller('ChatController', ['$scope', 'Socket', 'Authen
 
 	$scope.roomNames = [];
 
+	$scope.usersConnected = [];
+
 	Socket.on('chatMessage', function(message) {
 		$scope.messages.push(message);
+		console.log(message);
+		if (message.username === $scope.authentication.user.username && message.room != undefined) {
+			setTimeout(function(){ document.getElementById(message.room).scrollTop = document.getElementById(message.room).scrollHeight + 100; }, 100);
+		}
 	});
 
 	$scope.sendMessage = function(roomName) {
-		var message = {
-			text: this.messageText,
-			room: roomName
-		};
-		Socket.emit('chatMessage', message);
-		this.messageText = '';
+		if (this.messageText != '') {
+			var message = {
+				text: this.messageText,
+				room: roomName
+			};
+			Socket.emit('chatMessage', message);
+			this.messageText = '';
+		}
 	}
 
 	$scope.openNewRoom = function() {
-		console.log("hello");
 		Socket.emit('join', $scope.newRoomName);
 		$scope.roomNames.push($scope.newRoomName);
 		$scope.newRoomName = "";
@@ -28,12 +35,16 @@ angular.module('chat').controller('ChatController', ['$scope', 'Socket', 'Authen
 
 	$scope.leaveChat = function(roomName) {
 		Socket.emit('leave', roomName);
-		$scope.roomNames.remove(roomName);
+		$scope.roomNames.splice($scope.roomNames.indexOf(roomName), 1);
 	}
 
 	$scope.isMessageRoom = function(message, roomName) {
 		return message.room === roomName;
 	}
+
+	Socket.getUsersConnected(function(data) {
+		$scope.usersConnected = data;
+	});
 
 	$scope.$on('$destroy', function() {
 		Socket.removeListener('chatMessage');

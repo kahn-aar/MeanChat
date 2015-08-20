@@ -1,4 +1,4 @@
-angular.module('chat').service('Socket', ['Authentication', '$location', '$timeout', function(Authentication, $location, $timeout) {
+angular.module('chat').service('Socket', ['$http', 'Authentication', '$location', '$timeout', function($http, Authentication, $location, $timeout) {
 	
 
 
@@ -29,4 +29,8 @@ angular.module('chat').service('Socket', ['Authentication', '$location', '$timeo
 			this.socket.removeListener(eventName);
 		}
 	};
+
+	this.getUsersConnected = function(callback) {
+		return $http.get('/api/chatUsers', callback)
+	}
 }]);
